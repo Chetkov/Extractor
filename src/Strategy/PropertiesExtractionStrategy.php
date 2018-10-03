@@ -18,32 +18,32 @@ class PropertiesExtractionStrategy extends AbstractExtractionStrategy
     /**
      * PropertiesExtractionStrategy constructor.
      * @param ObjectCanBeExtractedSpecification $objectCanBeExtracted
-     * @param bool $isNeedExtractInheritedProperties
-     * @param bool $isNeedExtractPublicProperties
-     * @param bool $isNeedExtractProtectedProperties
      * @param bool $isNeedExtractPrivateProperties
+     * @param bool $isNeedExtractProtectedProperties
+     * @param bool $isNeedExtractPublicProperties
      * @param bool $isNeedExtractStaticProperties
+     * @param bool $isNeedExtractInheritedProperties
      */
     public function __construct(
         ObjectCanBeExtractedSpecification $objectCanBeExtracted,
-        bool $isNeedExtractInheritedProperties = false,
-        bool $isNeedExtractPublicProperties = true,
-        bool $isNeedExtractProtectedProperties = false,
         bool $isNeedExtractPrivateProperties = false,
-        bool $isNeedExtractStaticProperties = false
+        bool $isNeedExtractProtectedProperties = false,
+        bool $isNeedExtractPublicProperties = true,
+        bool $isNeedExtractStaticProperties = false,
+        bool $isNeedExtractInheritedProperties = false
     ) {
         parent::__construct($objectCanBeExtracted, $isNeedExtractInheritedProperties);
 
-        if ($isNeedExtractPublicProperties) {
-            $this->extractableAccessModifiers[] = \ReflectionProperty::IS_PUBLIC;
+        if ($isNeedExtractPrivateProperties) {
+            $this->extractableAccessModifiers[] = \ReflectionProperty::IS_PRIVATE;
         }
 
         if ($isNeedExtractProtectedProperties) {
             $this->extractableAccessModifiers[] = \ReflectionProperty::IS_PROTECTED;
         }
 
-        if ($isNeedExtractPrivateProperties) {
-            $this->extractableAccessModifiers[] = \ReflectionProperty::IS_PRIVATE;
+        if ($isNeedExtractPublicProperties) {
+            $this->extractableAccessModifiers[] = \ReflectionProperty::IS_PUBLIC;
         }
 
         if ($isNeedExtractStaticProperties) {
