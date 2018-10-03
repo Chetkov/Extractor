@@ -1,0 +1,17 @@
+{
+  "name": "v.chetkov/extractor",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Валерий Четков",
+      "email": "chetkov.valeriy@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Chetkov\\Extractor\\": "src/",
+      "Chetkov\\Extractor\\Sandbox\\": "sandbox/"
+    }
+  }
+}
