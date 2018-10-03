@@ -3,6 +3,7 @@
 namespace Chetkov\Extractor\Strategy;
 
 use Chetkov\Extractor\Composite\TreeElement;
+use Chetkov\Extractor\Specification\ObjectCanBeExtractedSpecification;
 
 /**
  * Class AbstractExtractionStrategy
@@ -11,11 +12,6 @@ use Chetkov\Extractor\Composite\TreeElement;
 abstract class AbstractExtractionStrategy implements ExtractionStrategy
 {
     protected const EXTRACTING_IS_NOT_ALLOWED = 1;
-
-    /**
-     * @var string[]
-     */
-    protected $extractableClasses;
 
     /**
      * @var bool
@@ -28,14 +24,19 @@ abstract class AbstractExtractionStrategy implements ExtractionStrategy
     protected $currentElementOfExtractedObjectsTree;
 
     /**
+     * @var ObjectCanBeExtractedSpecification
+     */
+    private $objectCanBeExtracted;
+
+    /**
      * AbstractExtractionStrategy constructor.
-     * @param array $extractableClasses
+     * @param ObjectCanBeExtractedSpecification $objectCanBeExtracted
      * @param bool $isNeedExtractInheritance
      */
-    public function __construct(array $extractableClasses, bool $isNeedExtractInheritance = false)
+    public function __construct(ObjectCanBeExtractedSpecification $objectCanBeExtracted, bool $isNeedExtractInheritance = false)
     {
-        $this->extractableClasses = $extractableClasses;
         $this->isNeedExtractInheritance = $isNeedExtractInheritance;
+        $this->objectCanBeExtracted = $objectCanBeExtracted;
     }
 
     /**
@@ -62,17 +63,7 @@ abstract class AbstractExtractionStrategy implements ExtractionStrategy
         }
 
         if (is_object($value)) {
-            $canBeExtracted = false;
-            foreach ($this->extractableClasses as $extractableClass) {
-                if ($value instanceof $extractableClass) {
-                    $canBeExtracted = $this->currentElementOfExtractedObjectsTree
-                        ? !$this->currentElementOfExtractedObjectsTree->isParentElementValue($value)
-                        : true;
-                    break;
-                }
-            }
-
-            if (!$canBeExtracted) {
+            if (!$this->objectCanBeExtracted->isSatisfiedBy($value, $this->currentElementOfExtractedObjectsTree)) {
                 throw new \RuntimeException('Value is object of not extractable class', self::EXTRACTING_IS_NOT_ALLOWED);
             }
 

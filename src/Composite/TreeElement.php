@@ -54,12 +54,23 @@ class TreeElement
 
     /**
      * @param $uniqueValue
+     * @param int $numberOfNestingLevelsToCheck
      * @return bool
      */
-    public function isParentElementValue($uniqueValue): bool
+    public function isParentElementValue($uniqueValue, int $numberOfNestingLevelsToCheck = 1): bool
     {
         $parent = $this->getParent();
-        return $parent ? $parent->isCurrentElementValue($uniqueValue) : false;
+        if (!$parent) {
+            return false;
+        }
+
+        if ($parent->isCurrentElementValue($uniqueValue)) {
+            return true;
+        }
+
+        return $numberOfNestingLevelsToCheck
+            ? $parent->isParentElementValue($uniqueValue, $numberOfNestingLevelsToCheck - 1)
+            : false;
     }
 
     /**

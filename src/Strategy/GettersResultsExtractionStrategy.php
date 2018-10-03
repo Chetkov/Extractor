@@ -3,6 +3,7 @@
 namespace Chetkov\Extractor\Strategy;
 
 use Chetkov\Extractor\Specification\MethodIsGetterSpecification;
+use Chetkov\Extractor\Specification\ObjectCanBeExtractedSpecification;
 
 /**
  * Class GettersResultsExtractionStrategy
@@ -13,21 +14,21 @@ class GettersResultsExtractionStrategy extends AbstractExtractionStrategy
     /**
      * @var MethodIsGetterSpecification
      */
-    private $methodIsGetterSpecification;
+    private $methodIsGetter;
 
     /**
      * GettersResultsExtractionStrategy constructor.
-     * @param array $extractableClasses
+     * @param ObjectCanBeExtractedSpecification $objectCanBeExtracted
      * @param MethodIsGetterSpecification $methodIsGetter
      * @param bool $isNeedExtractInheritedMethods
      */
     public function __construct(
-        array $extractableClasses,
+        ObjectCanBeExtractedSpecification $objectCanBeExtracted,
         MethodIsGetterSpecification $methodIsGetter,
         bool $isNeedExtractInheritedMethods = false
     ) {
-        parent::__construct($extractableClasses, $isNeedExtractInheritedMethods);
-        $this->methodIsGetterSpecification = $methodIsGetter;
+        parent::__construct($objectCanBeExtracted, $isNeedExtractInheritedMethods);
+        $this->methodIsGetter = $methodIsGetter;
     }
 
     /**
@@ -50,7 +51,7 @@ class GettersResultsExtractionStrategy extends AbstractExtractionStrategy
                 }
             }
 
-            if (!$this->methodIsGetterSpecification->isSatisfiedBy($method)) {
+            if (!$this->methodIsGetter->isSatisfiedBy($method)) {
                 continue;
             }
 

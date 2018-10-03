@@ -2,6 +2,8 @@
 
 namespace Chetkov\Extractor\Strategy;
 
+use Chetkov\Extractor\Specification\ObjectCanBeExtractedSpecification;
+
 /**
  * Class PropertiesExtractionStrategy
  * @package Chetkov\Extractor\Strategy
@@ -15,7 +17,7 @@ class PropertiesExtractionStrategy extends AbstractExtractionStrategy
 
     /**
      * PropertiesExtractionStrategy constructor.
-     * @param array $extractableClasses
+     * @param ObjectCanBeExtractedSpecification $objectCanBeExtracted
      * @param bool $isNeedExtractInheritedProperties
      * @param bool $isNeedExtractPublicProperties
      * @param bool $isNeedExtractProtectedProperties
@@ -23,14 +25,14 @@ class PropertiesExtractionStrategy extends AbstractExtractionStrategy
      * @param bool $isNeedExtractStaticProperties
      */
     public function __construct(
-        array $extractableClasses,
+        ObjectCanBeExtractedSpecification $objectCanBeExtracted,
         bool $isNeedExtractInheritedProperties = false,
         bool $isNeedExtractPublicProperties = true,
         bool $isNeedExtractProtectedProperties = false,
         bool $isNeedExtractPrivateProperties = false,
         bool $isNeedExtractStaticProperties = false
     ) {
-        parent::__construct($extractableClasses, $isNeedExtractInheritedProperties);
+        parent::__construct($objectCanBeExtracted, $isNeedExtractInheritedProperties);
 
         if ($isNeedExtractPublicProperties) {
             $this->extractableAccessModifiers[] = \ReflectionProperty::IS_PUBLIC;
