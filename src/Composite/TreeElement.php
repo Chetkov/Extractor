@@ -57,7 +57,7 @@ class TreeElement
      * @param int $numberOfNestingLevelsToCheck
      * @return bool
      */
-    public function isParentElementValue($uniqueValue, int $numberOfNestingLevelsToCheck = 1): bool
+    public function isParentElementValue($uniqueValue, int $numberOfNestingLevelsToCheck = 0): bool
     {
         $parent = $this->getParent();
         if (!$parent) {

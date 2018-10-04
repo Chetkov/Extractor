@@ -53,7 +53,7 @@ class ObjectExtractionServiceFactory
     {
         $objectCanBeExtractedSpecification = new ObjectCanBeExtractedSpecification(
             $config['extractable_classes'] ?? [],
-            $config['number_of_nesting_levels_to_check_in_tree'] ?? 1
+            $config['number_of_nesting_levels_to_check_in_tree'] ?? 0
         );
 
         switch ($config['strategy']) {
