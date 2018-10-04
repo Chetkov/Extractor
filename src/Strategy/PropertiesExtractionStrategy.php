@@ -2,7 +2,7 @@
 
 namespace Chetkov\Extractor\Strategy;
 
-use Chetkov\Extractor\Specification\ObjectCanBeExtractedSpecification;
+use Chetkov\Extractor\Strategy\Specification\ObjectCanBeExtractedSpecification;
 
 /**
  * Class PropertiesExtractionStrategy

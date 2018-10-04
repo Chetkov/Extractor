@@ -1,10 +1,10 @@
 <?php
 
-namespace Chetkov\Extractor\Specification;
+namespace Chetkov\Extractor\Strategy\Specification;
 
 /**
  * Class MethodIsGetterSpecification
- * @package Chetkov\Extractor\Specification
+ * @package Chetkov\Extractor\Strategy\Specification
  */
 class MethodIsGetterSpecification
 {

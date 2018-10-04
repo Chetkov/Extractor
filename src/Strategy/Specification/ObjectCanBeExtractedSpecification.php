@@ -1,12 +1,12 @@
 <?php
 
-namespace Chetkov\Extractor\Specification;
+namespace Chetkov\Extractor\Strategy\Specification;
 
 use Chetkov\Extractor\Composite\TreeElement;
 
 /**
  * Class ObjectCanBeExtractedSpecification
- * @package Chetkov\Extractor\Specification
+ * @package Chetkov\Extractor\Strategy\Specification
  */
 class ObjectCanBeExtractedSpecification
 {

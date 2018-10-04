@@ -2,8 +2,8 @@
 
 namespace Chetkov\Extractor;
 
-use Chetkov\Extractor\Specification\MethodIsGetterSpecification;
-use Chetkov\Extractor\Specification\ObjectCanBeExtractedSpecification;
+use Chetkov\Extractor\Strategy\Specification\MethodIsGetterSpecification;
+use Chetkov\Extractor\Strategy\Specification\ObjectCanBeExtractedSpecification;
 use Chetkov\Extractor\Strategy\ExtractionStrategy;
 use Chetkov\Extractor\Strategy\GettersResultsExtractionStrategy;
 use Chetkov\Extractor\Strategy\PropertiesExtractionStrategy;
