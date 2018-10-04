@@ -49,20 +49,23 @@ abstract class AbstractExtractionStrategy implements ExtractionStrategy
             $value = json_decode(json_encode($value), true);
         }
 
-        if (is_array($value)) {
+
+        if ($value instanceof \ArrayAccess) {
             foreach ($value as $key => $item) {
                 try {
                     $value[$key] = $this->prepareValue($item);
                 } catch (\Exception $e) {
                     if ($e->getCode() !== self::EXTRACTING_IS_NOT_ALLOWED) {
-                        throw new $e;
+                        throw $e;
                     }
                     unset($value[$key]);
                 }
             }
-        }
 
-        if (is_object($value)) {
+            if (!is_array($value)) {
+                $value = [];
+            }
+        } else if (is_object($value)) {
             if (!$this->objectCanBeExtracted->isSatisfiedBy($value, $this->currentElementOfExtractedObjectsTree)) {
                 throw new \RuntimeException('Value is object of not extractable class', self::EXTRACTING_IS_NOT_ALLOWED);
             }

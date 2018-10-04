@@ -61,7 +61,7 @@ class GettersResultsExtractionStrategy extends AbstractExtractionStrategy
                 $result[$name] = $this->prepareValue($value);
             } catch (\Exception $e) {
                 if ($e->getCode() !== self::EXTRACTING_IS_NOT_ALLOWED) {
-                    throw new $e;
+                    throw $e;
                 }
             }
         }
