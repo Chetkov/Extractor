@@ -25,7 +25,7 @@ class ObjectCanBeExtractedSpecification
      * @param array $extractableClasses
      * @param int $numberOfNestingLevelsToCheckInTree
      */
-    public function __construct(array $extractableClasses = [], int $numberOfNestingLevelsToCheckInTree = 1)
+    public function __construct(array $extractableClasses = [], int $numberOfNestingLevelsToCheckInTree = 0)
     {
         $this->extractableClasses = $extractableClasses;
         $this->numberOfNestingLevelsToCheckInTree = $numberOfNestingLevelsToCheckInTree;
