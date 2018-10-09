@@ -8,10 +8,18 @@
     }
   ],
   "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^6.0"
+  },
   "autoload": {
     "psr-4": {
-      "Chetkov\\Extractor\\": "src/",
-      "Chetkov\\Extractor\\Sandbox\\": "sandbox/"
+      "Chetkov\\Extractor\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Chetkov\\Extractor\\Sandbox\\": "sandbox/",
+      "Tests\\Chetkov\\Extractor\\": "tests/"
     }
   }
 }
