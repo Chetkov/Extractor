@@ -50,10 +50,11 @@ abstract class AbstractExtractionStrategy implements ExtractionStrategy
         }
 
 
-        if ($value instanceof \ArrayAccess) {
+        if (is_array($value) || $value instanceof \ArrayAccess) {
+            $valueArray = [];
             foreach ($value as $key => $item) {
                 try {
-                    $value[$key] = $this->prepareValue($item);
+                    $valueArray[$key] = $this->prepareValue($item);
                 } catch (\Exception $e) {
                     if ($e->getCode() !== self::EXTRACTING_IS_NOT_ALLOWED) {
                         throw $e;
@@ -62,9 +63,7 @@ abstract class AbstractExtractionStrategy implements ExtractionStrategy
                 }
             }
 
-            if (!is_array($value)) {
-                $value = [];
-            }
+            $value = $valueArray;
         } else if (is_object($value)) {
             if (!$this->objectCanBeExtracted->isSatisfiedBy($value, $this->currentElementOfExtractedObjectsTree)) {
                 throw new \RuntimeException('Value is object of not extractable class', self::EXTRACTING_IS_NOT_ALLOWED);
